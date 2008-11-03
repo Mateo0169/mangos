@@ -65,7 +65,7 @@ bool Guild::create(uint64 lGuid, std::string gname)
     leaderGuid = lGuid;
     name = gname;
     GINFO = "";
-    MOTD = "No message set.";
+    MOTD = "Aucun message du jour";
     guildbank_money = 0;
     purchased_tabs = 0;
 
@@ -88,15 +88,15 @@ bool Guild::create(uint64 lGuid, std::string gname)
         Id, gname.c_str(), GUID_LOPART(leaderGuid), dbGINFO.c_str(), dbMOTD.c_str(), EmblemStyle, EmblemColor, BorderStyle, BorderColor, BackgroundColor, guildbank_money);
     CharacterDatabase.CommitTransaction();
 
-    rname = "Guild Master";
+    rname = "Chef";
     CreateRank(rname,GR_RIGHT_ALL);
-    rname = "Officer";
+    rname = "Officier";
     CreateRank(rname,GR_RIGHT_ALL);
-    rname = "Veteran";
+    rname = "Vétéran";
     CreateRank(rname,GR_RIGHT_GCHATLISTEN | GR_RIGHT_GCHATSPEAK);
-    rname = "Member";
+    rname = "Membre";
     CreateRank(rname,GR_RIGHT_GCHATLISTEN | GR_RIGHT_GCHATSPEAK);
-    rname = "Initiate";
+    rname = "Initié";
     CreateRank(rname,GR_RIGHT_GCHATLISTEN | GR_RIGHT_GCHATSPEAK);
 
     return AddMember(lGuid, (uint32)GR_GUILDMASTER);
