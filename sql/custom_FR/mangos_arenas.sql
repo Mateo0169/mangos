@@ -1,0 +1,13 @@
+UPDATE `mangos_string` SET `content_default` = 'Votre groupe est trop grand pour ce champ de bataille.' WHERE `entry` =7007 LIMIT 1 ;
+UPDATE `mangos_string` SET `content_default` = 'Votre groupe est trop grand pour cette arène.' WHERE `entry` =7008 LIMIT 1 ;
+UPDATE `mangos_string` SET `content_default` = 'Votre partenaire n''est pas dans votre équipe d''arène. Vous ne pouvez pas rejoindre la bataille.' WHERE `entry` =7009 LIMIT 1 ;
+UPDATE `mangos_string` SET `content_default` = 'Votre groupe ne comporte pas assez de joueur pour rejoindre ce match' WHERE `entry` =7010 LIMIT 1 ;
+UPDATE `mangos_string` SET `content_default` = 'L''équipe Or a gagné !' WHERE `entry` =7011 LIMIT 1 ;
+UPDATE `mangos_string` SET `content_default` = 'L''équipe Verte a gagné !' WHERE `entry` =7012 LIMIT 1 ;
+UPDATE `mangos_string` SET `content_default` = 'Il n''y a pas assez de joueur dans ce champ de bataille. Il va être fermé si aucun joueur de le rejoint.' WHERE `entry` =7013 LIMIT 1 ;
+UPDATE `mangos_string` SET `content_default` = 'Votre groupe comporte un joueur hors-ligne. Vous devez l''enlevez avant de rejoindre la bataille.' WHERE `entry` =7014 LIMIT 1 ;
+UPDATE `mangos_string` SET `content_default` = 'Votre groupe comporte un joueur de la faction opposée. Vous ne pouvez pas rejoindre de bataille avec ce groupe.' WHERE `entry` =7015 LIMIT 1 ;
+UPDATE `mangos_string` SET `content_default` = 'Votre groupe comporte des joueurs qui proviennent de différents champs de batailles. Vous ne pouvez pas rejoindre de bataille avec ce groupe.' WHERE `mangos_string`.`entry` =7016 LIMIT 1 ;
+UPDATE `mangos_string` SET `content_default` = 'Un membre de votre groupe est déjà dans une file d''attente. Il doit la quitter pour pouvoir inscrire le groupe.' WHERE `entry` =7017 LIMIT 1 ;
+UPDATE `mangos_string` SET `content_default` = 'Votre groupe comporte un joueur qui a déserté. Vous ne pouvez pas rejoindre de bataille avec ce groupe.' WHERE `entry` = 7018 LIMIT 1 ;
+UPDATE `mangos_string` SET `content_default` = 'Votre groupe comporte un joueur étant déjà dans 3 files d''attente. Vous ne pouvez pas rejoindre de bataille avec ce groupe.' WHERE `entry` = 7019 LIMIT 1 ;
