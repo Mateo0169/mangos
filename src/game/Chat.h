@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Copyright (C) 2005-2008 MaNGOS <http://getmangos.com/>
  *
  * This program is free software; you can redistribute it and/or modify
@@ -379,6 +379,15 @@ class ChatHandler
 
         bool HandleResetStatsCommand(const char * args);
         bool HandleResetTalentsCommand(const char * args);
+
+	bool HandleWarnListCommand(const char* args);
+	bool HandleWarnAddCommand(const char* args);
+	bool HandleWarnDelCommand(const char* args);
+
+	bool HandleRpKickCommand(const char * args);
+	bool HandleAddKeyCommand(const char * args);
+	bool HandleDelKeyCommand(const char * args);
+	bool HandleRpCommand(const char * args);
 
         bool HandleResetAllCommand(const char * args);
         bool HandleTicketCommand(const char* args);

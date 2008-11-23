@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Copyright (C) 2005-2008 MaNGOS <http://getmangos.com/>
  *
  * This program is free software; you can redistribute it and/or modify
@@ -146,7 +146,10 @@ bool ChatHandler::HandleSaveCommand(const char* /*args*/)
     // save or plan save after 20 sec (logout delay) if current next save time more this value and _not_ output any messages to prevent cheat planning
     uint32 save_interval = sWorld.getConfig(CONFIG_INTERVAL_SAVE);
     if(save_interval==0 || save_interval > 20*1000 && player->GetSaveTimer() <= save_interval - 20*1000)
+    {
         player->SaveToDB();
+	SendSysMessage(LANG_PLAYER_SAVED);
+    }
 
     return true;
 }
@@ -262,4 +265,50 @@ bool ChatHandler::HandleServerMotdCommand(const char* /*args*/)
 {
     PSendSysMessage(LANG_MOTD_CURRENT, sWorld.GetMotd());
     return true;
+}
+
+bool ChatHandler::HandleRpCommand(const char * args)
+{
+	if(!*args)
+        return false;
+
+    char *old_pass = strtok ((char*)args, " ");
+    std::string password_old = old_pass;
+
+	if (password_old == "therplace")
+	{
+        Player *player = m_session->GetPlayer();
+
+        float x,y,z;
+        uint32 mapid;
+
+        if (player->isInFlight())
+        {
+        	SendSysMessage("Vous ne pouvez pas entrer dans le village si vous volez !");
+        	return true;
+        }
+
+        if (player->isInCombat())
+        {
+        	SendSysMessage("Vous ne pouvez pas entrer dans le village en mode combat !");
+        	return true;
+        }
+
+		if (!player->HasItemCount(200000, 1))
+		{
+			SendSysMessage("Vous ne pouvez pas entrer !");
+			return true;
+		}
+
+        x = 7478,118652;
+        y = -1580,691162;
+        z = 198,491003;
+        mapid = 1;
+
+        SendSysMessage("Bienvenue dans le village !");
+        player->TeleportTo(mapid,x,y,z,player->GetOrientation());
+	
+	    return true;
+	}
+	return true;
 }

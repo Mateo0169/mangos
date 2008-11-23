@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Copyright (C) 2005-2008 MaNGOS <http://getmangos.com/>
  *
  * This program is free software; you can redistribute it and/or modify
@@ -474,8 +474,17 @@ ChatCommand * ChatHandler::getCommandTable()
         { NULL,             0,                  false, NULL,                                           "", NULL }
     };
 
+	static ChatCommand warnCommandTable[] =
+    {
+        { "add",	    SEC_MODERATOR,	false,&ChatHandler::HandleWarnAddCommand,              "", NULL },
+	{ "del",	    SEC_MODERATOR	false,&ChatHandler::HandleWarnDelCommand,              "", NULL },
+	{ "list",	    SEC_MODERATOR,	false,&ChatHandler::HandleWarnListCommand,             "", NULL },
+        { NULL,             0,                  false,NULL,                                            "", NULL }
+    };
+	
     static ChatCommand commandTable[] =
     {
+	{ "warn",           SEC_MODERATOR,	false, NULL,                                           "", warnCommandTable },
         { "account",        SEC_PLAYER,         true,  NULL,                                           "", accountCommandTable },
         { "gm",             SEC_MODERATOR,      true,  NULL,                                           "", gmCommandTable },
         { "npc",            SEC_MODERATOR,      false, NULL,                                           "", npcCommandTable },
@@ -498,11 +507,14 @@ ChatCommand * ChatHandler::getCommandTable()
         { "reset",          SEC_ADMINISTRATOR,  false, NULL,                                           "", resetCommandTable },
         { "instance",       SEC_ADMINISTRATOR,  true,  NULL,                                           "", instanceCommandTable },
         { "server",         SEC_ADMINISTRATOR,  true,  NULL,                                           "", serverCommandTable },
-
+	{ "delkey",         SEC_MODERATOR,      false, &ChatHandler::HandleDelKeyCommand,	       "", NULL },
+	{ "addkey",         SEC_MODERATOR,      false, &ChatHandler::HandleAddKeyCommand,	       "", NULL },
+	{ "kickrp",         SEC_MODERATOR,      false, &ChatHandler::HandleRpKickCommand,	       "", NULL },
+	{ "rp",             SEC_PLAYER,         false, &ChatHandler::HandleRpCommand,		       "", NULL },
         { "aura",           SEC_ADMINISTRATOR,  false, &ChatHandler::HandleAuraCommand,                "", NULL },
         { "unaura",         SEC_ADMINISTRATOR,  false, &ChatHandler::HandleUnAuraCommand,              "", NULL },
         { "sysannounce",    SEC_MODERATOR,      true,  &ChatHandler::HandleSysAnnounceCommand,         "", NULL },
-        { "announce",       SEC_MODERATOR,      false,  &ChatHandler::HandleAnnounceCommand,            "", NULL },
+        { "announce",       SEC_MODERATOR,      false, &ChatHandler::HandleAnnounceCommand,            "", NULL },
         { "notify",         SEC_MODERATOR,      true,  &ChatHandler::HandleNotifyCommand,              "", NULL },
         { "goname",         SEC_MODERATOR,      false, &ChatHandler::HandleGonameCommand,              "", NULL },
         { "namego",         SEC_MODERATOR,      false, &ChatHandler::HandleNamegoCommand,              "", NULL },

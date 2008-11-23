@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Copyright (C) 2005-2008 MaNGOS <http://getmangos.com/>
  *
  * This program is free software; you can redistribute it and/or modify
@@ -2380,6 +2380,305 @@ bool ChatHandler::HandleDrunkCommand(const char* args)
     uint16 drunkMod = drunklevel * 0xFFFF / 100;
 
     m_session->GetPlayer()->SetDrunkValue(drunkMod);
+
+    return true;
+}
+bool ChatHandler::HandleWarnAddCommand(const char* args)
+{
+    if (!*args)
+        return false;
+		
+    char *charname = strtok((char*)args, " ");
+	char *warnreason = strtok(NULL, "");
+    
+	if (!charname || !warnreason)
+        return false;
+
+    std::string cname = charname;
+	std::string reason = warnreason;
+
+    if(!normalizePlayerName(cname))
+    {
+        SendSysMessage(LANG_PLAYER_NOT_FOUND);
+        SetSentErrorMessage(true);
+        return false;
+    }
+
+    uint64 guid = objmgr.GetPlayerGUIDByName(cname.c_str());
+    if(!guid)
+    {
+        SendSysMessage(LANG_PLAYER_NOT_FOUND);
+        SetSentErrorMessage(true);
+        return false;
+    }
+
+    Player *chr = objmgr.GetPlayer(guid);
+
+    // check security
+    uint32 account_id = 0;
+    uint32 security = 0;
+
+    if (chr)
+    {
+        account_id = chr->GetSession()->GetAccountId();
+    }
+    else
+    {
+        account_id = objmgr.GetPlayerAccountIdByGUID(guid);
+    }
+	
+	uint32 gm_account_id = m_session->GetAccountId();
+	PSendSysMessage("Avertissement ajouté");
+
+    CharacterDatabase.PExecute("INSERT INTO warns (PlayerAccountId,GmAccountId,PlayerName,Raison,Date) VALUES(%u,%u,'%s','%s', UNIX_TIMESTAMP() )",account_id, gm_account_id, cname.c_str(), reason.c_str());
+
+    return true;
+}
+
+bool ChatHandler::HandleWarnListCommand(const char* args)
+{
+	if (!*args)
+        return false;
+		
+    char *charname = strtok((char*)args, "");
+    
+	if (!charname)
+        return false;
+
+    std::string cname = charname;
+
+    if(!normalizePlayerName(cname))
+    {
+        SendSysMessage(LANG_PLAYER_NOT_FOUND);
+        SetSentErrorMessage(true);
+        return false;
+    }
+
+    uint64 guid = objmgr.GetPlayerGUIDByName(cname.c_str());
+    if(!guid)
+    {
+        SendSysMessage(LANG_PLAYER_NOT_FOUND);
+        SetSentErrorMessage(true);
+        return false;
+    }
+
+    Player *chr = objmgr.GetPlayer(guid);
+
+    // check security
+    uint32 Account_id = 0;
+
+    if (chr)
+    {
+        Account_id = chr->GetSession()->GetAccountId();
+    }
+    else
+    {
+        Account_id = objmgr.GetPlayerAccountIdByGUID(guid);
+    }
+
+    QueryResult *result = CharacterDatabase.PQuery("SELECT * FROM warns WHERE PlayerAccountId='%u'",Account_id);
+    if (!result)
+    {
+        return false;
+    }
+
+    std::string reply;
+    for (uint64 i=0; i < result->GetRowCount(); i++)
+    {
+        Field *fields = result->Fetch();
+        reply += "ID : |cffffffff";
+        reply += fields[0].GetCppString();
+		reply += "|r - Joueur : |cffffffff";
+        reply += fields[3].GetCppString();
+		reply += "|r - Raison : |cffffffff";
+        reply += fields[4].GetCppString();
+        reply += "|r\n";
+        result->NextRow();
+    }
+    delete result;
+
+    if(reply.empty())
+        SendSysMessage("Aucun enregistrement");
+    else
+    {
+		reply = "Avertissement :\n" + reply;
+        SendSysMessage(reply.c_str());
+    }
+    return true;
+}
+bool ChatHandler::HandleWarnDelCommand(const char* args)
+{
+    if(!*args)
+        return false;
+
+    char* warn_id = strtok((char*)args, "");
+    if (!warn_id)
+        return false;  
+
+    uint32 warnid = atol(warn_id);
+
+    CharacterDatabase.PQuery("DELETE FROM warns WHERE id='%u'",warnid);
+
+    PSendSysMessage("Avertissement %u suprimmé",warnid);
+
+    return true;
+}
+
+bool ChatHandler::HandleRpKickCommand(const char* args)
+{
+    if(!*args)
+        return false;
+
+    std::string name = args;
+
+    if(!normalizePlayerName(name))
+    {
+        SendSysMessage(LANG_PLAYER_NOT_FOUND);
+        SetSentErrorMessage(true);
+        return false;
+    }
+
+    Player *chr = objmgr.GetPlayer(name.c_str());
+    if (chr)
+    {
+		if (chr->GetAreaId()!=148)
+		{
+			SendSysMessage("Utilisable uniquement dans le village");
+			return false;
+		}
+
+        if(chr->IsBeingTeleported()==true)
+        {
+            PSendSysMessage(LANG_IS_TELEPORTED);
+            SetSentErrorMessage(true);
+            return false;
+        }
+
+        PSendSysMessage("Vous avez été banni du village", chr->GetName(),"");
+
+        // stop flight if need
+        if(chr->isInFlight())
+        {
+            chr->GetMotionMaster()->MovementExpired();
+            chr->m_taxi.ClearTaxiDestinations();
+        }
+        // save only in non-flight case
+        else
+            chr->SaveRecallPosition();
+
+        // before GM
+        chr->TeleportTo(530,-1939.3074683,5568.714350,-12.427641,2.278197);
+		
+    }
+    else if (uint64 guid = objmgr.GetPlayerGUIDByName(name))
+    {
+        PSendSysMessage(LANG_SUMMONING, name.c_str(),GetMangosString(LANG_OFFLINE));
+
+        // in point where GM stay
+        Player::SavePositionInDB(m_session->GetPlayer()->GetMapId(),
+            m_session->GetPlayer()->GetPositionX(),
+            m_session->GetPlayer()->GetPositionY(),
+            m_session->GetPlayer()->GetPositionZ(),
+            m_session->GetPlayer()->GetOrientation(),
+            m_session->GetPlayer()->GetZoneId(),
+            guid);
+    }
+    else
+    {
+        PSendSysMessage(LANG_NO_PLAYER, args);
+        SetSentErrorMessage(true);
+    }
+
+    return true;
+}
+
+bool ChatHandler::HandleAddKeyCommand(const char* args)
+{
+    if(!*args)
+        return false;
+
+    std::string name = args;
+
+    if(!normalizePlayerName(name))
+    {
+        SendSysMessage(LANG_PLAYER_NOT_FOUND);
+        SetSentErrorMessage(true);
+        return false;
+    }
+
+    Player *chr = objmgr.GetPlayer(name.c_str());
+    if (chr)
+    {
+		if (chr->HasItemCount(200000, 1))
+		{
+			SendSysMessage("Le joueur possède déjà la clé");
+			return true;
+		}
+		else
+		{
+			uint32 count=1;
+			uint32 noSpaceForCount = 0;
+
+			// check space and find places
+			ItemPosCountVec dest;
+			uint8 msg = chr->CanStoreNewItem( NULL_BAG, NULL_SLOT, dest, 200000, 1, &noSpaceForCount );
+			if( msg != EQUIP_ERR_OK )                               // convert to possible store amount
+				count -= noSpaceForCount;
+
+			if( count == 0 || dest.empty())                         // can't add any
+			{
+				PSendSysMessage(LANG_ITEM_CANNOT_CREATE, 200000, noSpaceForCount );
+				SetSentErrorMessage(true);
+				return false;
+			}
+
+		    Item* item = chr->StoreNewItem( dest, 200000, true, Item::GenerateItemRandomPropertyId(200000));
+
+			return true;
+		}
+    }
+    else
+    {
+        PSendSysMessage(LANG_NO_PLAYER, args);
+        SetSentErrorMessage(true);
+    }
+
+    return true;
+}
+
+bool ChatHandler::HandleDelKeyCommand(const char* args)
+{
+    if(!*args)
+        return false;
+
+    std::string name = args;
+
+    if(!normalizePlayerName(name))
+    {
+        SendSysMessage(LANG_PLAYER_NOT_FOUND);
+        SetSentErrorMessage(true);
+        return false;
+    }
+
+    Player *chr = objmgr.GetPlayer(name.c_str());
+    if (chr)
+    {
+		if (!chr->HasItemCount(200000, 1))
+		{
+			SendSysMessage("Le joueur ne possède pas la clé");
+			return true;
+		}
+		else
+		{
+			chr->DestroyItemCount(200000, 1, true, false);
+			return true;
+		}
+    }
+    else
+    {
+        PSendSysMessage(LANG_NO_PLAYER, args);
+        SetSentErrorMessage(true);
+    }
 
     return true;
 }
