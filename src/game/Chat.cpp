@@ -476,10 +476,10 @@ ChatCommand * ChatHandler::getCommandTable()
 
 	static ChatCommand warnCommandTable[] =
     {
-        { "add",	    SEC_MODERATOR,	false,&ChatHandler::HandleWarnAddCommand,              "", NULL },
-	{ "del",	    SEC_MODERATOR	false,&ChatHandler::HandleWarnDelCommand,              "", NULL },
-	{ "list",	    SEC_MODERATOR,	false,&ChatHandler::HandleWarnListCommand,             "", NULL },
-        { NULL,             0,                  false,NULL,                                            "", NULL }
+        { "add",            SEC_MODERATOR,      false, &ChatHandler::HandleWarnAddCommand,             "",NULL},
+        { "del",            SEC_MODERATOR,      false, &ChatHandler::HandleWarnDelCommand,             "",NULL},
+        { "list",           SEC_MODERATOR,      false, &ChatHandler::HandleWarnListCommand,            "",NULL},
+        { NULL,             0,                  false, NULL,                                           "",NULL}
     };
 	
     static ChatCommand commandTable[] =
