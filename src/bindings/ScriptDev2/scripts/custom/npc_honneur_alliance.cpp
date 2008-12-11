@@ -40,5 +40,5 @@ void AddSC_npc_honneur_alliance()
     newscript->Name="npc_honneur_alliance";
     newscript->pGossipHello =  &GossipHello_npc_honneur_alliance;
     newscript->pGossipSelect = &GossipSelect_npc_honneur_alliance;
-    m_scripts[nrscripts++] = newscript;
+    newscript->RegisterSelf();
 }

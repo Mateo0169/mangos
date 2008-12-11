@@ -235,6 +235,6 @@ void AddSC_teleporteur_capitales()
     newscript->pGOQuestAccept = NULL;
     newscript->pGOChooseReward = NULL;
 
-    m_scripts[nrscripts++] = newscript;
+    newscript->RegisterSelf();
 }
 
