@@ -75,6 +75,7 @@ extern void AddSC_generic_creature();
 
 // -- Custom --
 extern void AddSC_custom_example();
+extern void AddSC_teleporteur_capitales();
 extern void AddSC_custom_gossip_codebox();
 extern void AddSC_test();
 
@@ -1269,6 +1270,7 @@ void ScriptsInit()
 
     // -- Custom --
     AddSC_custom_example();
+    AddSC_teleporteur_capitales();
     AddSC_custom_gossip_codebox();
     AddSC_test();
 

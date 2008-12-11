@@ -258,6 +258,7 @@ libMaNGOSScript_la_SOURCES = \
     ScriptMgr.cpp \
     scripts/boss/sc_boss_onyxia.cpp \
     scripts/custom/sc_custom_example.cpp \
+    scripts/custom/sc_teleporteur_capitales.cpp \
     scripts/creature/sc_generic_caster.cpp \
     scripts/creature/sc_generic_melee.cpp \
     scripts/creature/sc_kobold.cpp \

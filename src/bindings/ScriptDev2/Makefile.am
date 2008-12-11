@@ -49,6 +49,7 @@ scripts/creature/mob_generic_creature.cpp \
 scripts/creature/simple_ai.cpp \
 scripts/creature/simple_ai.h \
 scripts/custom/custom_example.cpp \
+scripts/custom/sc_teleporteur_capitales.cpp \
 scripts/custom/custom_gossip_codebox.cpp \
 scripts/custom/test.cpp \
 scripts/go/go_scripts.cpp \

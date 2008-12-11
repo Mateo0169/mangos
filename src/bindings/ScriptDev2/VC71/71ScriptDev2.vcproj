@@ -196,6 +196,9 @@
 					RelativePath="..\scripts\custom\custom_example.cpp">
 				</File>
 				<File
+					RelativePath="..\scripts\custom\sc_teleporteur_capitales.cpp">
+				</File>
+				<File
 					RelativePath="..\scripts\custom\custom_gossip_codebox.cpp">
 				</File>
 				<File
