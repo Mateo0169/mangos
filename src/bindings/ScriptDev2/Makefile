@@ -259,6 +259,8 @@ libMaNGOSScript_la_SOURCES = \
     scripts/boss/sc_boss_onyxia.cpp \
     scripts/custom/sc_custom_example.cpp \
     scripts/custom/sc_teleporteur_capitales.cpp \
+    scripts/custom/npc_honneur_alliance.cpp \
+    scripts/custom/npc_honneur_horde.cpp \
     scripts/creature/sc_generic_caster.cpp \
     scripts/creature/sc_generic_melee.cpp \
     scripts/creature/sc_kobold.cpp \

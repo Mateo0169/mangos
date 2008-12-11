@@ -50,6 +50,8 @@ scripts/creature/simple_ai.cpp \
 scripts/creature/simple_ai.h \
 scripts/custom/custom_example.cpp \
 scripts/custom/sc_teleporteur_capitales.cpp \
+scripts/custom/npc_honneur_alliance.cpp \
+scripts/custom/npc_honneur_horde.cpp \
 scripts/custom/custom_gossip_codebox.cpp \
 scripts/custom/test.cpp \
 scripts/go/go_scripts.cpp \
