@@ -1449,19 +1449,40 @@
 				<Filter
 					Name="Zul&apos;Aman">
 					<File
-						RelativePath="..\scripts\zone\zulaman\boss_janalai.cpp">
+						RelativePath="..\scripts\zone\zulaman\boss_akilzon.cpp"
+						>
 					</File>
 					<File
-						RelativePath="..\scripts\zone\zulaman\boss_nalorakk.cpp">
+						RelativePath="..\scripts\zone\zulaman\boss_janalai.cpp"
+						>
 					</File>
 					<File
-						RelativePath="..\scripts\zone\zulaman\def_zulaman.h">
+						RelativePath="..\scripts\zone\zulaman\boss_halazzi.cpp"
+						>
 					</File>
 					<File
-						RelativePath="..\scripts\zone\zulaman\instance_zulaman.cpp">
+						RelativePath="..\scripts\zone\zulaman\boss_hexlord.cpp"
+						>
 					</File>
 					<File
-						RelativePath="..\scripts\zone\zulaman\zulaman.cpp">
+						RelativePath="..\scripts\zone\zulaman\boss_nalorakk.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\scripts\zone\zulaman\boss_zuljin.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\scripts\zone\zulaman\def_zulaman.h"
+						>
+					</File>
+					<File
+						RelativePath="..\scripts\zone\zulaman\instance_zulaman.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\scripts\zone\zulaman\zulaman.cpp"
+						>
 					</File>
 				</Filter>
 				<Filter
