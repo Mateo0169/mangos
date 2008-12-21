@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/UnifiedDB_FR/!svn/ver/156/UDB/trunk/Annexe/Dev
+END
+game_tele.sql
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/UnifiedDB_FR/!svn/ver/146/UDB/trunk/Annexe/Dev/game_tele.sql
+END
+script_texts.sql
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/UnifiedDB_FR/!svn/ver/156/UDB/trunk/Annexe/Dev/script_texts.sql
+END
+db_script_string.sql
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/UnifiedDB_FR/!svn/ver/156/UDB/trunk/Annexe/Dev/db_script_string.sql
+END

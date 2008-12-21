@@ -1,0 +1,77 @@
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/svn/UnifiedDB_FR/!svn/ver/156/UDB/trunk/Annexe
+END
+eventai_texts.sql
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/UnifiedDB_FR/!svn/ver/152/UDB/trunk/Annexe/eventai_texts.sql
+END
+locales_gameobject.sql
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/UnifiedDB_FR/!svn/ver/156/UDB/trunk/Annexe/locales_gameobject.sql
+END
+locales_page_text.sql
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/UnifiedDB_FR/!svn/ver/156/UDB/trunk/Annexe/locales_page_text.sql
+END
+locales_quest.sql
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/UnifiedDB_FR/!svn/ver/156/UDB/trunk/Annexe/locales_quest.sql
+END
+locales_npc_text.sql
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/UnifiedDB_FR/!svn/ver/156/UDB/trunk/Annexe/locales_npc_text.sql
+END
+game_event.sql
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/UnifiedDB_FR/!svn/ver/145/UDB/trunk/Annexe/game_event.sql
+END
+locales_npc_option.sql
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/UnifiedDB_FR/!svn/ver/154/UDB/trunk/Annexe/locales_npc_option.sql
+END
+mangos_string.sql
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/UnifiedDB_FR/!svn/ver/156/UDB/trunk/Annexe/mangos_string.sql
+END
+script_texts.sql
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/UnifiedDB_FR/!svn/ver/156/UDB/trunk/Annexe/script_texts.sql
+END
+locales_creature.sql
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/UnifiedDB_FR/!svn/ver/156/UDB/trunk/Annexe/locales_creature.sql
+END
+db_script_string.sql
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/UnifiedDB_FR/!svn/ver/153/UDB/trunk/Annexe/db_script_string.sql
+END
+locales_item.sql
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/UnifiedDB_FR/!svn/ver/156/UDB/trunk/Annexe/locales_item.sql
+END
