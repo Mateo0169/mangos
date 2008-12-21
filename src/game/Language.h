@@ -29,6 +29,7 @@ enum MangosStrings
     LANG_SYSTEMMESSAGE                  = 3,
     LANG_ANNOUNCE_COLOR                 = 2000,
     LANG_EVENTMESSAGE                   = 4,
+    LANG_AUTO_BROADCAST                 = 2001,
     LANG_NO_HELP_CMD                    = 5,
     LANG_NO_CMD                         = 6,
     LANG_NO_SUBCMD                      = 7,

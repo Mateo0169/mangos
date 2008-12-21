@@ -58,6 +58,7 @@
 #include "WaypointManager.h"
 #include "GMTicketMgr.h"
 #include "Util.h"
+#include "Language.h"
 
 INSTANTIATE_SINGLETON_1( World );
 
@@ -1270,6 +1271,9 @@ void World::SetInitialWorldSettings()
     WorldDatabase.PExecute("INSERT INTO uptime (startstring, starttime, uptime) VALUES('%s', " I64FMTD ", 0)",
         isoDate, uint64(m_startTime));
 
+    static uint32 abtimer = 0;
+    abtimer = sConfig.GetIntDefault("AutoBroadcast.Timer", 60000);
+
     m_timers[WUPDATE_OBJECTS].SetInterval(0);
     m_timers[WUPDATE_SESSIONS].SetInterval(0);
     m_timers[WUPDATE_WEATHERS].SetInterval(1000);
@@ -1277,6 +1281,7 @@ void World::SetInitialWorldSettings()
     m_timers[WUPDATE_UPTIME].SetInterval(m_configs[CONFIG_UPTIME_UPDATE]*MINUTE*1000);
                                                             //Update "uptime" table based on configuration entry in minutes.
     m_timers[WUPDATE_CORPSES].SetInterval(20*MINUTE*1000);  //erase corpses every 20 minutes
+    m_timers[WUPDATE_AUTOBROADCAST].SetInterval(abtimer);
 
     //to set mailtimer to return mails every day between 4 and 5 am
     //mailtimer is increased when updating auctions
@@ -1513,6 +1518,17 @@ void World::Update(time_t diff)
         uint32 nextGameEvent = gameeventmgr.Update();
         m_timers[WUPDATE_EVENTS].SetInterval(nextGameEvent);
         m_timers[WUPDATE_EVENTS].Reset();
+    }
+
+    static uint32 autobroadcaston = 0;
+    autobroadcaston = sConfig.GetIntDefault("AutoBroadcast.On", 0);
+    if(autobroadcaston == 1)
+    {
+        if (m_timers[WUPDATE_AUTOBROADCAST].Passed())
+        {
+            m_timers[WUPDATE_AUTOBROADCAST].Reset();
+            SendRNDBroadcast();
+        }
     }
 
     /// </ul>
@@ -2584,6 +2600,45 @@ void World::ProcessCliCommands()
 
     // print the console message here so it looks right
     zprint("mangos>");
+}
+
+void World::SendRNDBroadcast()
+{
+    std::string msg;
+    QueryResult *result = WorldDatabase.PQuery("SELECT `text` FROM `autobroadcast` ORDER BY RAND() LIMIT 1");
+
+    if(!result)
+        return;
+
+    msg = result->Fetch()[0].GetString();
+    delete result;
+
+    static uint32 abcenter = 0;
+    abcenter = sConfig.GetIntDefault("AutoBroadcast.Center", 0);
+    if(abcenter == 0)
+    {
+        sWorld.SendWorldText(LANG_AUTO_BROADCAST, msg.c_str());
+
+        sLog.outString("AutoBroadcast: '%s'",msg.c_str());
+    }
+    if(abcenter == 1)
+    {
+        WorldPacket data(SMSG_NOTIFICATION, (msg.size()+1));
+        data << msg;
+        sWorld.SendGlobalMessage(&data);
+
+        sLog.outString("AutoBroadcast: '%s'",msg.c_str());
+    }
+    if(abcenter == 2)
+    {
+        sWorld.SendWorldText(LANG_AUTO_BROADCAST, msg.c_str());
+
+        WorldPacket data(SMSG_NOTIFICATION, (msg.size()+1));
+        data << msg;
+        sWorld.SendGlobalMessage(&data);
+
+        sLog.outString("AutoBroadcast: '%s'",msg.c_str());
+    }
 }
 
 void World::InitResultQueue()
