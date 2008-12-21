@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svnroot/unifieddb/!svn/ver/362/trunk/Full_DB/ForCleanInstallOnly
+END
+realmd.sql
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svnroot/unifieddb/!svn/ver/362/trunk/Full_DB/ForCleanInstallOnly/realmd.sql
+END
+create_mysql.sql
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svnroot/unifieddb/!svn/ver/351/trunk/Full_DB/ForCleanInstallOnly/create_mysql.sql
+END
+characters.sql
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svnroot/unifieddb/!svn/ver/362/trunk/Full_DB/ForCleanInstallOnly/characters.sql
+END
+create_database_sd2.sql
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svnroot/unifieddb/!svn/ver/351/trunk/Full_DB/ForCleanInstallOnly/create_database_sd2.sql
+END
