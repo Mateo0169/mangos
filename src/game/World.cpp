@@ -1503,7 +1503,7 @@ void World::Update(time_t diff)
 
         sBattleGroundMgr.Update(diff);
 
-        sOutdoorPvPMgr.Update(diff
+        sOutdoorPvPMgr.Update(diff);
     }
 
     // execute callbacks from sql queries that were queued recently
