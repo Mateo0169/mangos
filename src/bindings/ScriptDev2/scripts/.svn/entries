@@ -1,0 +1,55 @@
+9
+
+dir
+812
+https://scriptdev2.svn.sourceforge.net/svnroot/scriptdev2/scripts
+https://scriptdev2.svn.sourceforge.net/svnroot/scriptdev2
+
+
+
+2008-12-22T10:21:48.757474Z
+810
+nofantasy
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+5f9c896b-1e26-0410-94da-f77f675e2462
+
+npc
+dir
+
+guard
+dir
+
+go
+dir
+
+boss
+dir
+
+creature
+dir
+
+custom
+dir
+
+zone
+dir
+
+areatrigger
+dir
+
+item
+dir
+
