@@ -1396,6 +1396,34 @@ LOCK TABLES `saved_variables` WRITE;
 /*!40000 ALTER TABLE `saved_variables` DISABLE KEYS */;
 /*!40000 ALTER TABLE `saved_variables` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `warns`
+--
+
+DROP TABLE IF EXISTS `warns`;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+CREATE TABLE `warns` (
+  `id` int(24) unsigned NOT NULL auto_increment,
+  `PlayerAccountId` int(11) unsigned NOT NULL,
+  `GmAccountId` int(11) unsigned NOT NULL,
+  `PlayerName` varchar(12) NOT NULL,
+  `Raison` text NOT NULL,
+  `Date` int(12) unsigned NOT NULL,
+  PRIMARY KEY  (`id`),
+  KEY `id` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Dumping data for table `warns`
+--
+
+LOCK TABLES `warns` WRITE;
+/*!40000 ALTER TABLE `warns` DISABLE KEYS */;
+/*!40000 ALTER TABLE `warns` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -1406,4 +1434,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2008-12-22 18:24:03
+-- Dump completed on 2008-12-30  0:18:59
