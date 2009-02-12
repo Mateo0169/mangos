@@ -634,7 +634,12 @@ void BattleGround::RewardMark(Player *plr,uint32 count)
     }
 
     if(IsSpell)
+    {
+        plr->RemoveSpellsCausingAura(SPELL_AURA_MOD_FEAR);
+        plr->RemoveSpellsCausingAura(SPELL_AURA_MOD_STUN);
+        plr->RemoveSpellsCausingAura(SPELL_AURA_MOD_CONFUSE);
         plr->CastSpell(plr, mark, true);
+    }
     else if ( objmgr.GetItemPrototype( mark ) )
     {
         ItemPosCountVec dest;
