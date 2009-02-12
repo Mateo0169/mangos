@@ -559,6 +559,13 @@ void Pet::Update(uint32 diff)
                 }
             }
 
+            Unit* temppet = owner->GetPet();
+            if (temppet->GetHealth()==1)
+            {
+                DealDamage(temppet, temppet->GetHealth(), NULL, DIRECT_DAMAGE, SPELL_SCHOOL_MASK_NORMAL, NULL, false);
+                return;
+            }
+
             if(m_duration > 0)
             {
                 if(m_duration > diff)
