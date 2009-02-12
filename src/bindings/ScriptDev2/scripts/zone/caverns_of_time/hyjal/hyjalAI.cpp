@@ -336,6 +336,9 @@ void hyjalAI::Retreat()
     // Get GOs
     cell_lock->Visit(cell_lock, go_visit, *(m_creature->GetMap()));
 
+    if(pInstance->GetData(DATA_KAZROGALEVENT) == IN_PROGRESS)
+        pInstance->SetData(DATA_KAZROGALEVENT, NOT_STARTED);
+
     CreatureList.clear();
     if (!creatures.empty())
     {
