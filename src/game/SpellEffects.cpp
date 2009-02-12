@@ -1770,7 +1770,7 @@ void Spell::EffectTriggerSpell(uint32 i)
             return;
         }
         // Cloak of Shadows
-        case 35729 :
+                case 35729 :
         {
             Unit::AuraMap& Auras = m_caster->GetAuras();
             for(Unit::AuraMap::iterator iter = Auras.begin(); iter != Auras.end(); ++iter)
@@ -1781,12 +1781,35 @@ void Spell::EffectTriggerSpell(uint32 i)
                     // ignore physical auras
                     (GetSpellSchoolMask(iter->second->GetSpellProto()) & SPELL_SCHOOL_MASK_NORMAL)==0 &&
                     // ignore immunity persistent spells
-                    !( iter->second->GetSpellProto()->AttributesEx & 0x10000 ) )
+                    !( iter->second->GetSpellProto()->AttributesEx & 0x10000 ) 
+					//ignore deserteur 
+					&& (iter->second->GetSpellProto()->Id != 26013)
+					)
                 {
                     m_caster->RemoveAurasDueToSpell(iter->second->GetSpellProto()->Id);
                     iter = Auras.begin();
                 }
-            }
+            }	
+			if(m_caster->HasAura(770,0)) // Enleve luciole rang 1
+				m_caster->RemoveAurasDueToSpell(770);
+			if(m_caster->HasAura(778,0)) // Enleve luciole rang 2
+				m_caster->RemoveAurasDueToSpell(778);
+			if(m_caster->HasAura(9749,0)) // Enleve luciole rang 3
+				m_caster->RemoveAurasDueToSpell(9749);
+			if(m_caster->HasAura(9907,0)) // Enleve luciole rang 4
+				m_caster->RemoveAurasDueToSpell(9907);
+			if(m_caster->HasAura(26993,0)) // Enleve luciole rang 5
+				m_caster->RemoveAurasDueToSpell(26993);
+			if(m_caster->HasAura(16857,0)) // Enleve luciole (farouche) rang 1
+				m_caster->RemoveAurasDueToSpell(16857);
+			if(m_caster->HasAura(17390,0)) // Enleve luciole (farouche) rang 2
+				m_caster->RemoveAurasDueToSpell(17390);
+			if(m_caster->HasAura(17391,0)) // Enleve luciole (farouche) rang 3
+				m_caster->RemoveAurasDueToSpell(17391);
+			if(m_caster->HasAura(17392,0)) // Enleve luciole (farouche) rang 4
+				m_caster->RemoveAurasDueToSpell(17392);
+			if(m_caster->HasAura(27011,0)) // Enleve luciole (farouche) rang 5
+				m_caster->RemoveAurasDueToSpell(27011);
             return;
         }
         // Priest Shadowfiend (34433) need apply mana gain trigger aura on pet
