@@ -8377,11 +8377,6 @@ Unit* Unit::GetCharm() const
 void Unit::SetPet(Pet* pet)
 {
     SetUInt64Value(UNIT_FIELD_SUMMON, pet ? pet->GetGUID() : 0);
-
-    // FIXME: hack, speed must be set only at follow
-    if(pet)
-        for(int i = 0; i < MAX_MOVE_TYPE; ++i)
-            pet->SetSpeed(UnitMoveType(i), m_speed_rate[i], true);
 }
 
 void Unit::SetCharm(Unit* pet)
@@ -10050,6 +10045,11 @@ void Unit::UpdateSpeed(UnitMoveType mtype, bool forced)
     }
 
     float bonus = non_stack_bonus > stack_bonus ? non_stack_bonus : stack_bonus;
+
+	//apply creature's base speed
+	if ( GetTypeId() == TYPEID_UNIT )
+		bonus *= ((Creature*)this)->GetBaseSpeed();
+
     // now we ready for speed calculation
     float speed  = main_speed_mod ? bonus*(100.0f + main_speed_mod)/100.0f : bonus;
 
@@ -10191,8 +10191,8 @@ void Unit::SetSpeed(UnitMoveType mtype, float rate, bool forced)
         data << float(GetSpeed(mtype));
         SendMessageToSet( &data, true );
     }
-    if(Pet* pet = GetPet())
-        pet->SetSpeed(MOVE_RUN, m_speed_rate[mtype],forced);
+    //if(Pet* pet = GetPet())
+        //pet->SetSpeed(MOVE_RUN, m_speed_rate[mtype],forced);
 }
 
 void Unit::SetHover(bool on)

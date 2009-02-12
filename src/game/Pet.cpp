@@ -1159,6 +1159,11 @@ bool Pet::InitStatsForLevel(uint32 petlevel)
             break;
     }
 
+    SetSpeed(MOVE_WALK, GetBaseSpeed());
+
+    UpdateSpeed(MOVE_RUN, true);
+    UpdateSpeed(MOVE_SWIM, true
+
     for (int i = SPELL_SCHOOL_HOLY; i < MAX_SPELL_SCHOOL; ++i)
         SetModifierValue(UnitMods(UNIT_MOD_RESISTANCE_START + i), BASE_VALUE, float(createResistance[i]));
 
